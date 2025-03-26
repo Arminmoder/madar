@@ -1,0 +1,28 @@
+ body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        direction: rtl;
+      }
+      .container {
+        width: 50%;
+        margin: auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        background-color: #f9f9f9;
+      }
+      input,
+      button {
+        margin: 5px;
+        padding: 5px;
+      }
+      button {
+        background-color: #28a745;
+        color: white;
+        border: none;
+        cursor: pointer;
+        padding: 10px;
+      }
+      #finalForm {
+        display: none;
+      }

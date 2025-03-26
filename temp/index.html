@@ -1,19 +1,101 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>form</h1>
-    <form action="{{url_for('home')}}" method="post">
-        <input type="text" name="name" id="name" placeholder="name"><br>
-        <input type="text" name="password" id="password" placeholder="password"><br>
-        <input type="submit" value="submit">
-    </form>
+<html lang="fa" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>مدار الکتریکی</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <h2>ورود اطلاعات مدار</h2>
 
-    <h3>{{name}}</h3>
-    <h3>{{password}}</h3>
-</body>
+      <!-- فرم ارسال اولیه -->
+      <form id="initialForm">
+        <label for="nudeInp">تعداد گره:</label>
+        <input type="number" name="nodes" id="nudeInp" /><br />
+
+        <label for="ResistanceInp">تعداد مقاومت:</label>
+        <input type="number" name="resistance" id="ResistanceInp" /><br />
+
+        <label for="CurrentGeneratorInp">تعداد مولد جریان:</label>
+        <input
+          type="number"
+          name="currentGenerator"
+          id="CurrentGeneratorInp"
+        /><br />
+
+        <button type="submit">ارسال اولیه</button>
+      </form>
+
+      <!-- فرم ارسال نهایی (مقادیر اولیه هم در این فرم اضافه می‌شوند) -->
+      <form id="finalForm" action="/final-submit" method="post">
+        <h3>مقادیر نهایی:</h3>
+
+        <!-- فیلدهای مخفی برای ارسال مقادیر اولیه -->
+        <input type="hidden" name="nodes" id="hiddenNodes" />
+        <input type="hidden" name="resistance" id="hiddenResistance" />
+        <input
+          type="hidden"
+          name="currentGenerator"
+          id="hiddenCurrentGenerator"
+        />
+
+        <!-- فیلدهای اضافی (دینامیکی) -->
+        <div id="resistanceInputs"></div>
+        <div id="currentInputs"></div>
+
+        <button type="submit">ارسال نهایی</button>
+      </form>
+    </div>
+
+    <script>
+      document
+        .getElementById("initialForm")
+        .addEventListener("submit", function (event) {
+          event.preventDefault(); // جلوگیری از ارسال فرم اولیه
+
+          // دریافت مقدار ورودی‌ها
+          let nodes = document.getElementById("nudeInp").value;
+          let resistanceCount = document.getElementById("ResistanceInp").value;
+          let currentCount = document.getElementById(
+            "CurrentGeneratorInp"
+          ).value;
+
+          // ذخیره مقادیر در فرم نهایی
+          document.getElementById("hiddenNodes").value = nodes;
+          document.getElementById("hiddenResistance").value = resistanceCount;
+          document.getElementById("hiddenCurrentGenerator").value =
+            currentCount;
+
+          // پاک کردن و ایجاد فیلدهای جدید
+          let resistanceInputs = document.getElementById("resistanceInputs");
+          let currentInputs = document.getElementById("currentInputs");
+          resistanceInputs.innerHTML = "";
+          currentInputs.innerHTML = "";
+
+          function createInputFields(parent, labelText, namePrefix, count) {
+            for (let i = 1; i <= count; i++) {
+              let label = document.createElement("label");
+              label.textContent = `${labelText} ${i}:`;
+              let input = document.createElement("input");
+              input.type = "text";
+              input.name = `${namePrefix}${i}`;
+              parent.appendChild(label);
+              parent.appendChild(input);
+              parent.appendChild(document.createElement("br"));
+            }
+          }
+
+          createInputFields(resistanceInputs, "مقاومت R", "r", resistanceCount);
+          createInputFields(currentInputs, "جریان I", "i", currentCount);
+
+          // نمایش فرم دوم
+          document.getElementById("finalForm").style.display = "block";
+        });
+    </script>
+  </body>
 </html>

@@ -54,25 +54,25 @@ $(document).ready(function () {
     // در اینجا می‌توان اطلاعات را پردازش کرد
     $("#finalForm").submit(); // در صورت نیاز به ارسال به سرور
   });
-  let x = 1;
-  let p = 0;
+  let slide = 1;
+  let tog = 0;
   $(".next1").click(function () {
-    if (p == 0) {
-      x++;
-      if (x == 4) {
-        p = 1;
-        x = 2;
+    if (tog == 0) {
+      slide++;
+      if (slide == 4) {
+        tog = 1;
+        slide = 2;
       }
-      if (x == 3) {
+      if (slide == 3) {
         $(".next1").css("transform", "rotateZ(-90deg)");
       }
     } else {
-      x--;
-      if (x == 1) {
-        p = 0;
+      slide--;
+      if (slide == 1) {
+        tog = 0;
         $(".next1").css("transform", "rotateZ(90deg)");
       }
     }
-    $("#slide" + x).prop("checked", true);
+    $("#slide" + slide).prop("checked", true);
   });
 });

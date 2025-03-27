@@ -11,9 +11,11 @@ app = Flask(__name__, template_folder="temp")
 def index():
     return render_template("index.html")
 
-
+viwe =0
 @app.route('/final-submit', methods=['POST'])
 def final_submit():
+    global viwe
+    viwe +=1
     # دریافت مقادیر اولیه
     nodes = request.form.get("nodes")
     resistance = request.form.get("resistance")
@@ -136,7 +138,7 @@ def final_submit():
                 result["error"] = "5گره اشتباه وارد شده است"
         else:
             result["error"] = "6گره اشتباه وارد شده است"
-
+    result["viwe"]=str(viwe)
     for i in range(nude):
 
         for a in range(nude):

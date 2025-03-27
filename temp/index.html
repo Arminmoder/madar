@@ -1,101 +1,176 @@
 <!DOCTYPE html>
-<html lang="fa" dir="rtl">
+<html lang="fa">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>مدار الکتریکی</title>
-    <link
-      rel="stylesheet"
-      href="{{ url_for('static', filename='css/style.css') }}"
-    />
+    <title>armin onsorpour</title>
+    <script
+      src="https://kit.fontawesome.com/3dde4771d4.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="../static/css/style.css" />
+    <link rel="icon" type="image/png" href="../static/image/icon.png" />
   </head>
   <body>
-    <div class="container">
-      <h2>ورود اطلاعات مدار</h2>
+    <main>
+      <div class="next1"><i class="fa-regular fa-circle-right"></i></div>
+      <div class="container">
+        <div class="wrapper">
+          <i class="fa-solid fa-bars"></i>
+          <form>
+            <input
+              type="radio"
+              id="slide1"
+              name="slider"
+              autofocus
+              title="معرفی"
+              class="leftoggle"
+              checked
+            />
+            <!-- با اتو فکوس میشه با کیبرد کنترل کرد -->
+            <input
+              type="radio"
+              id="slide2"
+              name="slider"
+              title="اطلاعات اولیه"
+              class="leftoggle"
+            />
+            <input
+              type="radio"
+              id="slide3"
+              name="slider"
+              title="اطلاعات نهایی"
+              class="leftoggle"
+            />
+            <div class="labels">
+              <label for="slide1" class="mainlabel" id="slide1">
+                <div class="content">
+                  <div class="information-nude">
+                    <p class="par1">
+                      تحلیل مدار یکی از مهم‌ترین مباحث در مهندسی برق است که
+                      روش‌های مختلفی برای حل آن وجود دارد. یکی از این روش‌ها،
+                      تحلیل گره (Node Analysis) است. این روش برای یافتن ولتاژهای
+                      گره (نود) در یک مدار الکتریکی به کار می‌رود و به‌ویژه در
+                      تحلیل مدارهای مقاومتی، الکترونیکی و AC کاربرد زیادی دارد.
+                    </p>
+                    <h3>راهنمای ورود اطلاعات برای تحلیل مدار نود</h3>
+                    <div class="rahnama">
+                      <h4>تعداد گره‌ها (Nodes):</h4>
+                      <p>
+                        ابتدا تعداد گره‌ مقاموت و مولد جریان مدار خود را وارد
+                        کنید.
+                      </p>
+                      <h4>مقاومت‌ها:</h4>
+                      <p>
+                        برای هر مقاومت، گره‌های متصل به آن و مقدار مقاومت را
+                        وارد کنید. فرمت ورودی به‌صورت (گره ۱، گره ۲، مقدار
+                        مقاومت) خواهد بود (مثال: ۱ ۲ 10 برای مقاومت ۱۰ اهم بین
+                        گره‌های ۱ و ۲).
+                      </p>
+                      <h4>منابع جریان:</h4>
+                      <p>
+                        برای هر منبع جریان، گره‌های متصل و مقدار جریان را وارد
+                        کنید. فرمت ورودی به‌صورت (گره ۱، گره ۲، مقدار جریان)
+                        خواهد بود (مثال: ۱ ۳ 2 برای منبع جریان ۲ آمپر بین
+                        گره‌های ۱ و ۳).
+                        <br />
+                        نکته: توجه داشته باشید مولد جریان وارد گره دوم میشود
+                      </p>
+                    </div>
+                  </div>
+                  <div class="icon">
+                    از کیبورد برای حرکت اسلاید ها میتوانید استفاده کنید
+                  </div>
+                </div>
+              </label>
+              <label for="slide2" class="mainlabel" id="slide2">
+                <div class="content">
+                  <h2>ورود اطلاعات مدار</h2>
+                  <form id="initialForm">
+                    <div>
+                      <label for="nudeInp">تعداد گره:</label>
+                      <input type="number" name="nodes" id="nudeInp" />
+                    </div>
+                    <div>
+                      <label for="ResistanceInp">تعداد مقاومت:</label>
+                      <input
+                        type="number"
+                        name="resistance"
+                        id="ResistanceInp"
+                      />
+                    </div>
+                    <div>
+                      <label for="CurrentGeneratorInp">تعداد مولد جریان:</label>
+                      <input
+                        type="number"
+                        name="currentGenerator"
+                        id="CurrentGeneratorInp"
+                      />
+                    </div>
+                    <button type="button" id="processInitial">
+                      ثبت اطلاعات
+                    </button>
+                  </form>
+                </div>
+              </label>
+              <label for="slide3" class="mainlabel" id="slide3">
+                <div class="content">
+                  <h3 class="slide3title">اطلاعات نهایی</h3>
+                  <h4 class="error3">
+                    لطفا اطلاعات صفحه قبل را کامل وارد کنید
+                  </h4>
+                  <!-- فرم نهایی -->
+                  <form
+                    id="finalForm"
+                    action="/final-submit"
+                    method="post"
+                    style="display: none"
+                  >
+                    <input type="hidden" name="nodes" id="hiddenNodes" />
+                    <input
+                      type="hidden"
+                      name="resistance"
+                      id="hiddenResistance"
+                    />
+                    <input
+                      type="hidden"
+                      name="currentGenerator"
+                      id="hiddenCurrentGenerator"
+                    />
+                    <div class="inputfinalp">
+                      <div class="inputfinal">
+                        <div id="resistanceInputs"></div>
+                        <div id="currentInputs"></div>
+                      </div>
 
-      <!-- فرم ارسال اولیه -->
-      <form id="initialForm">
-        <label for="nudeInp">تعداد گره:</label>
-        <input type="number" name="nodes" id="nudeInp" /><br />
-
-        <label for="ResistanceInp">تعداد مقاومت:</label>
-        <input type="number" name="resistance" id="ResistanceInp" /><br />
-
-        <label for="CurrentGeneratorInp">تعداد مولد جریان:</label>
-        <input
-          type="number"
-          name="currentGenerator"
-          id="CurrentGeneratorInp"
-        /><br />
-
-        <button type="submit">ارسال اولیه</button>
-      </form>
-
-      <!-- فرم ارسال نهایی (مقادیر اولیه هم در این فرم اضافه می‌شوند) -->
-      <form id="finalForm" action="/final-submit" method="post">
-        <h3>مقادیر نهایی:</h3>
-
-        <!-- فیلدهای مخفی برای ارسال مقادیر اولیه -->
-        <input type="hidden" name="nodes" id="hiddenNodes" />
-        <input type="hidden" name="resistance" id="hiddenResistance" />
-        <input
-          type="hidden"
-          name="currentGenerator"
-          id="hiddenCurrentGenerator"
-        />
-
-        <!-- فیلدهای اضافی (دینامیکی) -->
-        <div id="resistanceInputs"></div>
-        <div id="currentInputs"></div>
-
-        <button type="submit">ارسال نهایی</button>
-      </form>
-    </div>
-
-    <script>
-      document
-        .getElementById("initialForm")
-        .addEventListener("submit", function (event) {
-          event.preventDefault(); // جلوگیری از ارسال فرم اولیه
-
-          // دریافت مقدار ورودی‌ها
-          let nodes = document.getElementById("nudeInp").value;
-          let resistanceCount = document.getElementById("ResistanceInp").value;
-          let currentCount = document.getElementById(
-            "CurrentGeneratorInp"
-          ).value;
-
-          // ذخیره مقادیر در فرم نهایی
-          document.getElementById("hiddenNodes").value = nodes;
-          document.getElementById("hiddenResistance").value = resistanceCount;
-          document.getElementById("hiddenCurrentGenerator").value =
-            currentCount;
-
-          // پاک کردن و ایجاد فیلدهای جدید
-          let resistanceInputs = document.getElementById("resistanceInputs");
-          let currentInputs = document.getElementById("currentInputs");
-          resistanceInputs.innerHTML = "";
-          currentInputs.innerHTML = "";
-
-          function createInputFields(parent, labelText, namePrefix, count) {
-            for (let i = 1; i <= count; i++) {
-              let label = document.createElement("label");
-              label.textContent = `${labelText} ${i}:`;
-              let input = document.createElement("input");
-              input.type = "text";
-              input.name = `${namePrefix}${i}`;
-              parent.appendChild(label);
-              parent.appendChild(input);
-              parent.appendChild(document.createElement("br"));
-            }
-          }
-
-          createInputFields(resistanceInputs, "مقاومت R", "r", resistanceCount);
-          createInputFields(currentInputs, "جریان I", "i", currentCount);
-
-          // نمایش فرم دوم
-          document.getElementById("finalForm").style.display = "block";
-        });
-    </script>
+                      <button type="button" id="processFinal">
+                        ارسال نهایی
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </label>
+            </div>
+          </form>
+          <span class="menu"></span>
+          <div class="title">
+            <h1>روی دکمه بالا کلیک کنید</h1>
+          </div>
+          <div class="overlay">
+            <ul>
+              <li><a href="https://t.me/Armin_moder" target="_blank">تلگرام</a></li>
+              <li><a href="https://eitaa.com/Armin_moder" target="_blank">ایتا</a></li>
+              <li><a href="https://github.com/Arminmoder/madar" target="_blank">گیت هاب</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </main>
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.min.js"
+      integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+      crossorigin="anonymous"
+    ></script>
+    <script src="../static/js/script.js"></script>
   </body>
 </html>

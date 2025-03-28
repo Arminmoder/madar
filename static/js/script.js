@@ -16,14 +16,42 @@ $(document).ready(function () {
     }
   });
   $("#processInitial").on("click", function () {
-    $("#slide3").prop("checked", true);
-    $(".slide3title").show();
-    $(".error3").hide();
     // دریافت مقدار ورودی‌ها
     let nodes = $("#nudeInp").val();
     let resistanceCount = $("#ResistanceInp").val();
     let currentCount = $("#CurrentGeneratorInp").val();
-
+    if (nodes != "" && resistanceCount != "" && currentCount != "") {
+      $("#slide3").prop("checked", true);
+      $(".slide3title").show();
+      $(".error3").hide();
+      if (Number(resistanceCount) > 9) {
+        if (14 >= Number(resistanceCount) && Number(resistanceCount) > 12) {
+          $(":root").css("--resistance-count", Number(resistanceCount));
+        } else if (
+          18 >= Number(resistanceCount) &&
+          Number(resistanceCount) > 14
+        ) {
+          $(":root").css("--resistance-count", Number(resistanceCount) + 1);
+        } else if (
+          21 >= Number(resistanceCount) &&
+          Number(resistanceCount) > 18
+        ) {
+          $(":root").css("--resistance-count", Number(resistanceCount) + 4);
+        } else {
+          $(":root").css("--resistance-count", Number(resistanceCount) - 6);
+        }
+      } else if (currentCount > 9) {
+        if (15 >= Number(currentCount) && Number(currentCount) > 12) {
+          $(":root").css("--current-count", Number(currentCount) - 3);
+        } else if (18 >= Number(currentCount) && Number(currentCount) > 15) {
+          $(":root").css("--current-count", Number(currentCount) + 1);
+        } else if (21 >= Number(currentCount) && Number(currentCount) > 18) {
+          $(":root").css("--current-count", Number(currentCount) + 4);
+        } else {
+          $(":root").css("--current-count", Number(currentCount) - 5);
+        }
+      }
+    }
     // ذخیره مقادیر در فرم نهایی
     $("#hiddenNodes").val(nodes);
     $("#hiddenResistance").val(resistanceCount);
@@ -74,5 +102,31 @@ $(document).ready(function () {
       }
     }
     $("#slide" + slide).prop("checked", true);
+  });
+  $(document).on("keydown", ".input-field", function (event) {
+    if (event.key === "Enter") {
+      event.preventDefault(); // جلوگیری از عملکرد پیش‌فرض
+      let inputs = $(".input-field"); // گرفتن همه اینپوت‌ها
+      let index = inputs.index(this); // پیدا کردن اینپوت فعال
+
+      if (index !== -1 && index < inputs.length - 1) {
+        inputs.eq(index + 1).focus(); // فوکوس روی اینپوت بعدی
+      } else {
+        $("#processInitial").click(); // کلیک روی دکمه
+      }
+    }
+  });
+  $(document).on("keydown", ".inputfinal div div input", function (event) {
+    if (event.key === "Enter") {
+      event.preventDefault(); // جلوگیری از عملکرد پیش‌فرض
+      let inputs = $(".inputfinal div div input"); // گرفتن همه اینپوت‌ها
+      let index = inputs.index(this); // پیدا کردن اینپوت فعال
+
+      if (index !== -1 && index < inputs.length - 1) {
+        inputs.eq(index + 1).focus(); // فوکوس روی اینپوت بعدی
+      } else {
+        $("#processFinal").click(); // کلیک روی دکمه
+      }
+    }
   });
 });

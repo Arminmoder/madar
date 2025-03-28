@@ -112,14 +112,14 @@ def final_submit():
                 matrixR[n2][n1] -= conductance
                 # کندکدانس های مربوط به گره های متصل را از هم کم میکن
             elif (n2 >= nude):
-                result["error"] = "1گره اشتباه وارد شده است"
+                result["error"] = "گره اشتباه وارد شده است"
         elif (0 <= n2 < nude):
             matrixR[n2][n2] += conductance
             # کندکدانس ها را در قطر اصلی جمع میکنه
             if (n1 >= nude):
-                result["error"] = "2گره اشتباه وارد شده است"
+                result["error"] = "گره اشتباه وارد شده است"
         else:
-            result["error"] = "3گره اشتباه وارد شده است"
+            result["error"] = "گره اشتباه وارد شده است"
 
     for _ in range(currents_count):
         n1, n2, Co = map(float, currents[f"i{_+1}"].split())
@@ -131,14 +131,13 @@ def final_submit():
             if (0 <= n2 < nude):
                 matrixI[n2][0] += Co
             elif (n2 >= nude):
-                result["error"] = "4گره اشتباه وارد شده است"
+                result["error"] = "گره اشتباه وارد شده است"
         elif (0 <= n2 < nude):
             matrixI[n2][0] += Co
             if (n1 >= nude):
-                result["error"] = "5گره اشتباه وارد شده است"
+                result["error"] = "گره اشتباه وارد شده است"
         else:
-            result["error"] = "6گره اشتباه وارد شده است"
-    result["viwe"]=str(viwe)
+            result["error"] = "گره اشتباه وارد شده است"
     for i in range(nude):
 
         for a in range(nude):
@@ -147,14 +146,14 @@ def final_submit():
         for j in range(nude):
             matrix[j][i] = matrixI[j][0]
         if (matrixR == 0 or matrix == 0):
-            result["error"] = "7گره اشتباه وارد شده است"
+            result["error"] = "گره اشتباه وارد شده است"
         else:
             if (type(result) == dict):
                 result[f"v{i+1}"] = round(determinant(matrix) /
                                           determinant(matrixR), 6)
     draw_circuit(resistorslist, currentslist, filename="./static/circuit.png")
 
-    return render_template('result.html', result=result)
+    return render_template('result.html', result=result,viwe=viwe)
 
 
 if __name__ == "__main__":

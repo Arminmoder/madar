@@ -1,3 +1,8 @@
+:root {
+  --resistance-count: 0;
+  --current-count: 0;
+}
+
 @font-face {
   font-family: "IRANSans";
   src: url(./static/font/IRANSansXnum/Woff/IRANSansXFaNum-Medium.woff)
@@ -369,7 +374,7 @@ input.leftoggle {
   justify-content: center;
   align-items: first baseline;
   background-color: #3f9497;
-  height: 40vh;
+  min-height: 40vh;
   padding: 20px;
   font-size: 24px;
   color: #ffffff;
@@ -396,6 +401,16 @@ input.leftoggle {
   padding: 5px;
   direction: ltr;
   margin-right: 10px;
+  background-color: #ecececdb;
+  border: none;
+  transition: all 0.5s linear;
+}
+#slide2 .content div input:focus {
+  outline: none;
+  border: none;
+  transform: scale(1.05);
+  background-color: #ffffff;
+  box-shadow: rgba(39, 39, 39, 0.477) 4px 4px 20px 04px;
 }
 
 #slide2 button {
@@ -431,18 +446,6 @@ input.leftoggle {
   display: none;
 }
 
-@keyframes ripple {
-  0% {
-    box-shadow: 0 0 0 0 rgb(255, 255, 255), 0 0 0 20px rgba(255, 255, 255, 0.4),
-      0 0 0 40px rgba(255, 255, 255, 0.3), 0 0 0 60px rgba(255, 255, 255, 0.2);
-  }
-  100% {
-    box-shadow: 0 0 0 20 rgb(255, 255, 255, 0.4),
-      0 0 0 40px rgba(255, 255, 255, 0.3), 0 0 0 60px rgba(255, 255, 255, 0.2),
-      0 0 0 80px rgba(255, 255, 255, 0);
-  }
-}
-
 #slide3 h3 {
   position: relative;
   top: -40vh;
@@ -468,6 +471,23 @@ input.leftoggle {
   width: 100%;
 }
 
+#slide3 .content div input {
+  width: 100%;
+  font-size: 20px;
+  height: 30px;
+  padding: 5px;
+  direction: ltr;
+  background-color: #ecececdb;
+  border: none;
+  transition: all 0.5s linear;
+}
+#slide3 .content div input:focus {
+  outline: none;
+  border: none;
+  transform: scale(1.05);
+  box-shadow: rgba(39, 39, 39, 0.477) 4px 4px 20px 04px;
+}
+
 #slide3 #resistanceInputs {
   direction: rtl;
   display: flex;
@@ -484,6 +504,13 @@ input.leftoggle {
   box-shadow: rgb(39, 39, 39) 4px 7px 20px 4px;
   margin: 5px;
   max-width: 300px;
+  max-height: 80vh;
+  overflow: scroll;
+  padding-top: 20px;
+  direction: ltr;
+}
+#slide3 #resistanceInputs div:nth-child(1) {
+  margin-top: calc(var(--resistance-count) * 32px);
 }
 
 #slide3 #currentInputs {
@@ -502,6 +529,12 @@ input.leftoggle {
   border-radius: 5%;
   box-shadow: rgb(39, 39, 39) 4px 7px 20px 4px;
   margin: 5px;
+  max-height: 80vh;
+  overflow: scroll;
+  direction: ltr;
+}
+#slide3 #currentInputs div:nth-child(1) {
+  margin-top: calc(var(--current-count) * 32px);
 }
 .inputfinal {
   display: flex;
@@ -533,7 +566,7 @@ input.leftoggle {
   align-items: center;
 }
 
-.next1{
+.next1 {
   position: fixed;
   right: 10px;
   bottom: 15px;
@@ -542,30 +575,66 @@ input.leftoggle {
   cursor: pointer;
   width: auto;
   height: auto;
-  transition: all linear .3s;
+  transition: all linear 0.3s;
   transform: rotateZ(90deg);
-
+  border-radius: 100%;
 }
-.next1 i{
+.next1 i {
   width: 100%;
   height: 100%;
   font-size: 38px;
-  
 }
-.fa-solid{
+.next1 i:focus {
+  outline: none;
+  box-shadow: none;
+  color: inherit; /* اگر رنگ تغییر می‌کند */
+}
+.next1:focus {
+  outline: none;
+  box-shadow: none;
+  color: inherit;
+}
+.fa-solid {
   cursor: pointer;
 }
-.overlay a{
-  color:#ffffff;
+.overlay a {
+  color: #ffffff;
   font-size: 20px;
 }
 
-@media only screen and (min-width: 500px) and (max-width: 800px) {
-  .icon{
-    display: none!important;
+#slide3 #resistanceInputs div {
+  direction: rtl;
+}
+::-webkit-scrollbar {
+  display: none;
+}
+
+@media only screen and (max-width: 800px) {
+  #slide3 #resistanceInputs div:nth-child(1) {
+    margin-top: calc(var(--resistance-count) * 20px);
+  }
+
+  #slide3 #currentInputs div:nth-child(1) {
+    margin-top: calc(var(--current-count) * 20px);
+  }
+  #slide2 h2 {
+    font-size: 24px;
+    top: -29.5vh;
+    left: 70px;
+  }
+  #slide2 button {
+    width: 95%;
+  }
+  #slide2 .content div {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .icon {
+    display: none !important;
   }
   .slide3title {
-    display: none!important;
+    display: none !important;
   }
   #slide3 h3 {
     position: relative;
@@ -582,7 +651,7 @@ input.leftoggle {
     padding: 20px;
     font-size: 18px;
     color: #ffffff;
-    
+
     border-radius: 1%;
   }
   #slide3 .content div {
@@ -591,36 +660,26 @@ input.leftoggle {
     align-items: center;
     justify-content: center;
     width: 100%;
-    font-size: 16px!important;
+    font-size: 16px !important;
   }
 
   #slide3 #resistanceInputs {
-    direction: rtl;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: first baseline;
-    background-color: rgb(14, 93, 162);
-    min-height: 0vh;
-    width: 40vw;
-    padding: 20px;
     font-size: 18px;
-    color: #ffffff;
     border-radius: 1%;
-    box-shadow: rgb(39, 39, 39) 4px 7px 20px 4px;
     margin: 5px;
     max-width: 300px;
+    max-height: 80vh;
+    overflow: scroll;
   }
 
   #slide3 #currentInputs {
-
     border-radius: 1%;
   }
+
   .inputfinal {
     display: flex;
     flex-direction: row;
   }
-
 
   .inputfinalp {
     display: flex;
@@ -639,23 +698,31 @@ input.leftoggle {
   }
   .information-nude p {
     font-size: 15px !important;
-
   }
-  .container form input.leftoggle::after{
+  .container form input.leftoggle::after {
     display: none;
   }
-
 }
-@media only screen and (min-width: 800px) and (max-width: 900px){
-  .container form input.leftoggle::after{
+@media only screen and (min-width: 800px) and (max-width: 900px) {
+  .container form input.leftoggle::after {
     display: none;
   }
-    #slide3 .content div {
+  #slide3 .content div {
     justify-content: center;
-    }
+  }
 }
-@media only screen and (min-width: 900px) and (max-width: 1100px){
-    #slide3 .content div {
+@media only screen and (min-width: 900px) and (max-width: 1100px) {
+  #slide3 .content div {
     justify-content: center;
-    }
+  }
+}
+
+.overlay ul li i {
+  position: relative;
+  transform: translate(2px, -9px);
+}
+.overlay ul li:nth-child(2) img {
+  width: 28px;
+  position: relative;
+  transform: translate(10px, 5px);
 }

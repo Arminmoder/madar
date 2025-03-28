@@ -1,33 +1,49 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<html lang="fa" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>result</title>
-</head>
-<body>
-    <style>
-        body {
-        font-family: Arial, sans-serif;
-        text-align: center;
-        direction: rtl;
-      }
-      .container {
-        width: 50%;
-        margin: auto;
-        padding: 20px;
-        border: 1px solid #ccc;
-        border-radius: 10px;
-        background-color: #f9f9f9;
-      }
-    </style>
-    <h1>نتیجه</h1>
-    <hr>
-  
+    <script
+      src="https://kit.fontawesome.com/3dde4771d4.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="../static/css/styler.css" />
+  </head>
+  <body>
+    <h2>نتایج</h2>
     {% for key, value in result.items() %}
         <p style="color: red;">{{ key }}: {{ value }}</p>
-        <hr>
     {% endfor %}
-    <img src="../static/circuit.png" alt="مدار الکتریکی">
-</body>
+    <div class="image">
+    </div>
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.min.js"
+      integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+      crossorigin="anonymous"
+    ></script>
+    <div class="container">
+      <div class="circle"><i class="fa-solid fa-xmark"></i></div>
+      <div class="circle-big">
+        <ul class="icons">
+          <li>
+            <a href="http://87.107.105.20:5000"><i class="fa-solid fa-house"></i></a>
+          </li>
+          <li class="viwe">
+            <div class="card-inner">
+              <div class="card-front"><i class="fa-solid fa-user"></i></div>
+              <div class="card-back">{{viwe}}</div>
+            </div>
+          </li>
+          <li>
+            <a href="../static/circuit.png" target="_blank"><i class="fa-solid fa-chart-pie"></i></a>
+          </li>
+          <li>
+            <a href="https://t.me/Armin_moder" target="_blank"><i class="fa-brands fa-telegram"></i></a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <script src="../static/js/scriptr.js"></script>
+  </body>
 </html>

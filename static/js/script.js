@@ -1,4 +1,6 @@
 $(document).ready(function () {
+  let resistanceCount1;
+  let currentCount1;
   let clickCount;
   clickCount = 0;
   $(".wrapper i").click(function () {
@@ -20,6 +22,8 @@ $(document).ready(function () {
     let nodes = $("#nudeInp").val();
     let resistanceCount = $("#ResistanceInp").val();
     let currentCount = $("#CurrentGeneratorInp").val();
+    resistanceCount1 = resistanceCount;
+    currentCount1 = currentCount;
     if (nodes != "" && resistanceCount != "" && currentCount != "") {
       $("#slide3").prop("checked", true);
       $(".slide3title").show();
@@ -126,6 +130,42 @@ $(document).ready(function () {
         inputs.eq(index + 1).focus(); // فوکوس روی اینپوت بعدی
       } else {
         $("#processFinal").click(); // کلیک روی دکمه
+      }
+    }
+  });
+
+  let startY = 0;
+  let endY = 0;
+  let slideT = 1;
+
+  $("body").on("touchstart", function (e) {
+    startY = e.originalEvent.touches[0].clientY;
+  });
+  $("body").on("touchend", function (e) {
+    endY = e.originalEvent.changedTouches[0].clientY;
+    if (currentCount1 == "undefined" || resistanceCount1 == undefined) {
+      if (startY - endY > 50) {
+        if (slideT < 3) {
+          slideT++;
+        }
+        $("#slide" + slideT).prop("checked", true);
+      } else if (endY - startY > 50) {
+        if (slideT > 1) {
+          slideT--;
+        }
+        $("#slide" + slideT).prop("checked", true);
+      }
+    } else if (currentCount1 < 10 && resistanceCount1 < 10) {
+      if (startY - endY > 50) {
+        if (slideT < 3) {
+          slideT++;
+        }
+        $("#slide" + slideT).prop("checked", true);
+      } else if (endY - startY > 50) {
+        if (slideT > 1) {
+          slideT--;
+        }
+        $("#slide" + slideT).prop("checked", true);
       }
     }
   });

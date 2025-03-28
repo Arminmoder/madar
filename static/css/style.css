@@ -507,7 +507,7 @@ input.leftoggle {
   max-height: 80vh;
   overflow: scroll;
   padding-top: 20px;
-  direction: ltr;
+  direction: rtl;
 }
 #slide3 #resistanceInputs div:nth-child(1) {
   margin-top: calc(var(--resistance-count) * 32px);
@@ -531,7 +531,7 @@ input.leftoggle {
   margin: 5px;
   max-height: 80vh;
   overflow: scroll;
-  direction: ltr;
+  direction: rtl;
 }
 #slide3 #currentInputs div:nth-child(1) {
   margin-top: calc(var(--current-count) * 32px);

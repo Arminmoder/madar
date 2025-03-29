@@ -608,6 +608,11 @@ input.leftoggle {
 ::-webkit-scrollbar {
   display: none;
 }
+@media only screen and (max-width: 500px) {
+  .next1 {
+    display: none;
+  }
+}
 
 @media only screen and (max-width: 800px) {
   #slide3 #resistanceInputs div:nth-child(1) {

@@ -24,6 +24,7 @@ $(document).ready(function () {
     let currentCount = $("#CurrentGeneratorInp").val();
     resistanceCount1 = resistanceCount;
     currentCount1 = currentCount;
+
     if (nodes != "" && resistanceCount != "" && currentCount != "") {
       $("#slide3").prop("checked", true);
       $(".slide3title").show();
@@ -43,6 +44,17 @@ $(document).ready(function () {
           $(":root").css("--resistance-count", Number(resistanceCount) + 4);
         } else {
           $(":root").css("--resistance-count", Number(resistanceCount) - 6);
+        }
+        if (currentCount > 9) {
+          if (15 >= Number(currentCount) && Number(currentCount) > 12) {
+            $(":root").css("--current-count", Number(currentCount) - 3);
+          } else if (18 >= Number(currentCount) && Number(currentCount) > 15) {
+            $(":root").css("--current-count", Number(currentCount) + 1);
+          } else if (21 >= Number(currentCount) && Number(currentCount) > 18) {
+            $(":root").css("--current-count", Number(currentCount) + 4);
+          } else {
+            $(":root").css("--current-count", Number(currentCount) - 5);
+          }
         }
       } else if (currentCount > 9) {
         if (15 >= Number(currentCount) && Number(currentCount) > 12) {

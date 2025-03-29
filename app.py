@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import networkx as nx
 from flask import Flask, request, render_template
 import matplotlib
-matplotlib.use('Agg')  
+matplotlib.use('Agg')
 
 app = Flask(__name__, template_folder="temp")
 
@@ -11,11 +11,14 @@ app = Flask(__name__, template_folder="temp")
 def index():
     return render_template("index.html")
 
-viwe =0
+
+viwe = 0
+
+
 @app.route('/final-submit', methods=['POST'])
 def final_submit():
     global viwe
-    viwe +=1
+    viwe += 1
     # دریافت مقادیر اولیه
     nodes = request.form.get("nodes")
     resistance = request.form.get("resistance")
@@ -145,17 +148,17 @@ def final_submit():
                 matrix[a][b] = matrixR[a][b]
         for j in range(nude):
             matrix[j][i] = matrixI[j][0]
-        if (matrixR == 0 or matrix == 0):
-            result["error"] = "گره اشتباه وارد شده است"
+        if (determinant(matrix) == 0 or determinant(matrixR) == 0):
+            result["error"] = "مدار مشکل دارد"
         else:
             if (type(result) == dict):
                 result[f"v{i+1}"] = round(determinant(matrix) /
                                           determinant(matrixR), 6)
     draw_circuit(resistorslist, currentslist, filename="./static/circuit.png")
 
-    return render_template('result.html', result=result,viwe=viwe)
+    return render_template('result.html', result=result, viwe=viwe)
 
 
 if __name__ == "__main__":
 
-    app.run(host="0.0.0.0", port=80)
+    app.run(host="0.0.0.0", port=80, debug=True)

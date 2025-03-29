@@ -66,6 +66,9 @@ $(document).ready(function () {
         } else {
           $(":root").css("--current-count", Number(currentCount) - 5);
         }
+      }else{
+        $(":root").css("--current-count", 0);
+        $(":root").css("--resistance-count",0);
       }
     }
     // ذخیره مقادیر در فرم نهایی

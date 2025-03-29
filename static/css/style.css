@@ -729,5 +729,18 @@ input.leftoggle {
 .overlay ul li:nth-child(2) img {
   width: 28px;
   position: relative;
-  transform: translate(10px, 5px);
+  transform: translate(52px, 5px);
 }
+.overlay ul li:nth-child(1){
+  transform: translate(10px,0px);
+}
+
+
+.overlay ul li:nth-child(2){
+  transform: translate(-2px,0px);
+}
+.overlay ul li:nth-child(4){
+  transform: translate(18px,0px);
+}
+
+

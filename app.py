@@ -29,7 +29,7 @@ def final_submit():
     currents = {k: v for k, v in request.form.items() if k.startswith("i")}
 
     def draw_circuit(resistors, currents, filename="circuit.png"):
-        # ایجاد گراف‌ها
+            # ایجاد گراف‌ها
         G = nx.DiGraph()  # گراف جهت‌دار برای جریان‌ها
         Y = nx.Graph()  # گراف غیرجهت‌دار برای مقاومت‌ها
         G_all = nx.Graph()  # گراف کمکی شامل همه گره‌ها
@@ -50,22 +50,37 @@ def final_submit():
         # رسم مقاومت‌ها بدون فلش
         edge_labels = {(r[0], r[1]): f'R={r[2]}' for r in resistors}
         nx.draw(Y, pos, with_labels=True, node_color="lightblue",
-                edge_color="black", width=1.5)
+                edge_color="black", width=1.5, connectionstyle="arc3,rad=0.1")
         nx.draw_networkx_edge_labels(
-            Y, pos, edge_labels=edge_labels, font_size=10, font_color="black")
+            Y, pos, edge_labels=edge_labels, font_size=10, font_color="black", label_pos=0.6, rotate=True)
+
+        # تعریف current_labels پیش از استفاده
+        current_labels = {(c[0], c[1]): f'I={c[2]}' for c in currents}
+
+        current_edge_labels = {}
+        for edge in current_labels:
+            node1, node2 = edge
+            # محاسبه وسط مسیر به‌طور دستی
+            x_pos = (pos[node1][0] + pos[node2][0]) / 2
+            y_pos = (pos[node1][1] + pos[node2][1]) / 2
+            # کمی جابجایی برای لیبل‌ها، افزایش مقدار y_pos برای قرار دادن برچسب بالاتر
+            current_edge_labels[edge] = (
+                x_pos + -0.1, y_pos + -0.1)  # تغییر مقدار y_pos
+
+        nx.draw_networkx_edge_labels(
+            G, pos, edge_labels=current_labels, font_size=10, font_color="red",
+            label_pos=0.5, bbox=dict(facecolor='white', edgecolor='none', alpha=0.7))
 
         # رسم جریان‌ها با فلش‌ها و رنگ قرمز
         current_edges = [(c[0], c[1]) for c in currents]
-        current_labels = {(c[0], c[1]): f'I={c[2]}' for c in currents}
         nx.draw_networkx_edges(G, pos, edgelist=current_edges,
-                               edge_color="red", width=2.5, arrowsize=20)
-        nx.draw_networkx_edge_labels(
-            G, pos, edge_labels=current_labels, font_size=10, font_color="red")
+                            edge_color="red", width=2.5, arrowsize=20,
+                            connectionstyle="arc3,rad=0.2")
 
         # ذخیره و نمایش نمودار
-
         plt.savefig(filename, format='png')  # ذخیره تصویر
-        plt.close()  # بستن نمودار بدون نمایش
+        plt.close()  # بستن نمودار
+        # بستن نمودار بدون نمایش
 
     def determinant(matrix):
         # بررسی اگر ماتریس فقط یک درایه داشته باشد، مقدار همان درایه را برمی‌گردانیم

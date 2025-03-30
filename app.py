@@ -4,6 +4,7 @@ from flask import Flask, request, render_template
 import matplotlib
 matplotlib.use('Agg')
 
+
 app = Flask(__name__, template_folder="temp")
 
 
@@ -19,87 +20,57 @@ viwe = 0
 def final_submit():
     global viwe
     viwe += 1
-    # دریافت مقادیر اولیه
     nodes = request.form.get("nodes")
     resistance = request.form.get("resistance")
     currentGenerator = request.form.get("currentGenerator")
-
-    # دریافت مقادیر اضافی (دینامیکی)
     resistances = {k: v for k, v in request.form.items() if k.startswith("r")}
     currents = {k: v for k, v in request.form.items() if k.startswith("i")}
 
     def draw_circuit(resistors, currents, filename="circuit.png"):
         # ایجاد گراف‌ها
-        G = nx.DiGraph()  # گراف جهت‌دار برای جریان‌ها
-        Y = nx.Graph()  # گراف غیرجهت‌دار برای مقاومت‌ها
-        G_all = nx.Graph()  # گراف کمکی شامل همه گره‌ها
-
-        # اضافه کردن مقاومت‌ها
+        G = nx.DiGraph()
+        Y = nx.Graph()
+        G_all = nx.Graph()
         for r in resistors:
             Y.add_edge(r[0], r[1], resistance=r[2])
-            G_all.add_edge(r[0], r[1])  # گره‌ها را به گراف کمکی اضافه می‌کنیم
-
-        # اضافه کردن جریان‌ها
+            G_all.add_edge(r[0], r[1])
         for c in currents:
             G.add_edge(c[0], c[1], current=c[2])
-            G_all.add_edge(c[0], c[1])  # گره‌ها را به گراف کمکی اضافه می‌کنیم
-
-        # تنظیم موقعیت گره‌ها بر اساس گراف کامل
-        pos = nx.spring_layout(G_all)  # ایجاد موقعیت برای همه‌ی گره‌ها
-
-        # رسم مقاومت‌ها بدون فلش
+            G_all.add_edge(c[0], c[1])
+        pos = nx.spring_layout(G_all)
         edge_labels = {(r[0], r[1]): f'R={r[2]}' for r in resistors}
         nx.draw(Y, pos, with_labels=True, node_color="lightblue",
                 edge_color="black", width=1.5, connectionstyle="arc3,rad=0.1")
         nx.draw_networkx_edge_labels(
             Y, pos, edge_labels=edge_labels, font_size=10, font_color="black", label_pos=0.6, rotate=True)
 
-        # تعریف current_labels پیش از استفاده
         current_labels = {(c[0], c[1]): f'I={c[2]}' for c in currents}
-
         current_edge_labels = {}
         for edge in current_labels:
             node1, node2 = edge
-            # محاسبه وسط مسیر به‌طور دستی
             x_pos = (pos[node1][0] + pos[node2][0]) / 2
             y_pos = (pos[node1][1] + pos[node2][1]) / 2
-            # کمی جابجایی برای لیبل‌ها، افزایش مقدار y_pos برای قرار دادن برچسب بالاتر
             current_edge_labels[edge] = (
-                x_pos + -0.1, y_pos + -0.1)  # تغییر مقدار y_pos
+                x_pos + -0.1, y_pos + -0.1)
 
         nx.draw_networkx_edge_labels(
             G, pos, edge_labels=current_labels, font_size=10, font_color="red",
             label_pos=0.5, bbox=dict(facecolor='white', edgecolor='none', alpha=0.7))
-
-        # رسم جریان‌ها با فلش‌ها و رنگ قرمز
         current_edges = [(c[0], c[1]) for c in currents]
         nx.draw_networkx_edges(G, pos, edgelist=current_edges,
                                edge_color="red", width=2.5, arrowsize=20,
                                connectionstyle="arc3,rad=0.2")
-
-        # ذخیره و نمایش نمودار
-        plt.savefig(filename, format='png')  # ذخیره تصویر
-        plt.close()  # بستن نمودار
-        # بستن نمودار بدون نمایش
+        plt.savefig(filename, format='png')
+        plt.close()
 
     def determinant(matrix):
-        # بررسی اگر ماتریس فقط یک درایه داشته باشد، مقدار همان درایه را برمی‌گردانیم
         if len(matrix) == 1:
             return matrix[0][0]
-
-        # بررسی اگر ماتریس 2x2 باشد، فرمول ساده‌ی دترمینان را اعمال می‌کنیم
         if len(matrix) == 2:
             return matrix[0][0] * matrix[1][1] - matrix[0][1] * matrix[1][0]
-
-        # مقدار اولیه‌ی دترمینان را صفر می‌گذاریم
         det = 0
-
-        # پیمایش سطر اول ماتریس برای محاسبه دترمینان
         for col in range(len(matrix)):
-            # ایجاد ماتریس جزئی (کوچک‌تر) با حذف سطر اول و ستون جاری
             sub_matrix = [row[:col] + row[col+1:] for row in matrix[1:]]
-
-            # اعمال فرمول دترمینان با استفاده از بسط لاپلاس
             cofactor = ((-1) ** col) * matrix[0][col] * determinant(sub_matrix)
             det += cofactor
 
@@ -127,18 +98,14 @@ def final_submit():
         resistorslist.append((n1 + 1, n2 + 1, Re))
         if (0 <= n1 < nude):
             matrixR[n1][n1] += conductance
-            # کندکدانس ها را در قطر اصلی جمع میکنه
             if (0 <= n2 < nude):
                 matrixR[n2][n2] += conductance
-                # کندکدانس ها را در قطر اصلی جمع میکنه
                 matrixR[n1][n2] -= conductance
                 matrixR[n2][n1] -= conductance
-                # کندکدانس های مربوط به گره های متصل را از هم کم میکن
             elif (n2 >= nude):
                 result["error"] = "گره اشتباه وارد شده است"
         elif (0 <= n2 < nude):
             matrixR[n2][n2] += conductance
-            # کندکدانس ها را در قطر اصلی جمع میکنه
             if (n1 >= nude):
                 result["error"] = "گره اشتباه وارد شده است"
         else:

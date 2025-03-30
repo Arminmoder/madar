@@ -372,7 +372,7 @@ p.project {
     bottom: 14px;
   }
 }
-.image {
+.linkimage {
   position: absolute;
   bottom: 0;
   width: 80%;
@@ -381,11 +381,15 @@ p.project {
   background-position: center;
   background-repeat: no-repeat;
   background-size:contain;
+    transition: all .5s linear;
 }
-.image img {
+.image{
   width: 100%;
 }
-
+.linkimage:hover{
+  transform: scale(1.1);
+  filter: brightness(0.5);
+}
 li a i:hover {
     color: rgb(255, 255, 255)!important;
 }
@@ -411,3 +415,4 @@ h2{
   padding: 10px;
   border-radius: 3%;
 }
+

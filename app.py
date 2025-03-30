@@ -156,6 +156,7 @@ def final_submit():
                 result["error"] = "گره اشتباه وارد شده است"
         else:
             result["error"] = "گره اشتباه وارد شده است"
+    detr = determinant(matrixR)
     for i in range(nude):
 
         for a in range(nude):
@@ -164,7 +165,6 @@ def final_submit():
         for j in range(nude):
             matrix[j][i] = matrixI[j][0]
         detm = determinant(matrix)
-        detr = determinant(matrixR)
         if (detm == 0 or detr == 0):
             if (determinant(matrix) == 0):
                 result[f"v{i+1}"] = 0

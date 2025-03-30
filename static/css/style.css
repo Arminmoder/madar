@@ -84,9 +84,6 @@ body {
 }
 .container form input.leftoggle::after {
   content: "" attr(title) "";
-  /* ------------------------------------------------------------------------------- */
-  /* خیلی خوبه این تریک جدیده */
-  /* به جای تایتل میشه هر اتریبیوتی گزاشت */
   position: relative;
   left: 30px;
   opacity: 0;
@@ -731,16 +728,87 @@ input.leftoggle {
   position: relative;
   transform: translate(52px, 5px);
 }
-.overlay ul li:nth-child(1){
-  transform: translate(10px,0px);
+.overlay ul li:nth-child(1) {
+  transform: translate(10px, 0px);
 }
 
-
-.overlay ul li:nth-child(2){
-  transform: translate(-2px,0px);
+.overlay ul li:nth-child(2) {
+  transform: translate(-2px, 0px);
 }
-.overlay ul li:nth-child(4){
-  transform: translate(18px,0px);
+.overlay ul li:nth-child(4) {
+  transform: translate(18px, 0px);
 }
 
-
+.load {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  background: #282c34;
+  color: white;
+  font-family: Arial, sans-serif;
+  flex-direction: column;
+  z-index: -5;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.loading {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+.dots {
+  position: relative;
+  top: 56px;
+  left: 74px;
+}
+.dots::after {
+  content: "";
+  display: inline-block;
+  animation: dots 1.5s steps(3, end) infinite;
+}
+@keyframes dots {
+  0% {
+    content: "";
+  }
+  33% {
+    content: ".";
+  }
+  66% {
+    content: "..";
+  }
+  100% {
+    content: "...";
+  }
+}
+.math {
+  position: relative;
+  min-width: 300px;
+  min-height: 50px;
+  overflow: hidden;
+  margin-left: 100px;
+}
+#equation {
+  position: absolute;
+  left: 0;
+  top: 0px;
+  font-size: 32px;
+  font-weight: bold;
+  margin-top: 10px;
+}
+#result {
+  font-size: 32px;
+  font-weight: bold;
+  color: #ffd700;
+  position: absolute;
+  background: rgb(255, 255, 255);
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0) 7%, #282c34 7%);
+  left: 123px;
+  top: 9px;
+  text-indent: 20px;
+  text-align: left;
+  text-overflow: ellipsis;
+  min-width: 300px;
+  padding: 0px !important;
+}

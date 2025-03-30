@@ -3,6 +3,7 @@ $(document).ready(function () {
   let currentCount1;
   let clickCount;
   clickCount = 0;
+  // Hamburger bar top left
   $(".wrapper i").click(function () {
     clickCount++;
     if (clickCount != 0) {
@@ -17,8 +18,8 @@ $(document).ready(function () {
       }
     }
   });
+  // Making the second form
   $("#processInitial").on("click", function () {
-    // دریافت مقدار ورودی‌ها
     let nodes = $("#nudeInp").val();
     let resistanceCount = $("#ResistanceInp").val();
     let currentCount = $("#CurrentGeneratorInp").val();
@@ -66,17 +67,14 @@ $(document).ready(function () {
         } else {
           $(":root").css("--current-count", Number(currentCount) - 5);
         }
-      }else{
+      } else {
         $(":root").css("--current-count", 0);
-        $(":root").css("--resistance-count",0);
+        $(":root").css("--resistance-count", 0);
       }
     }
-    // ذخیره مقادیر در فرم نهایی
     $("#hiddenNodes").val(nodes);
     $("#hiddenResistance").val(resistanceCount);
     $("#hiddenCurrentGenerator").val(currentCount);
-
-    // پاک کردن و ایجاد فیلدهای جدید
     $("#resistanceInputs").empty();
     $("#currentInputs").empty();
 
@@ -89,18 +87,47 @@ $(document).ready(function () {
         parent.append($("<div>").append(label, input));
       }
     }
-
     createInputFields($("#resistanceInputs"), "مقاومت R", "r", resistanceCount);
     createInputFields($("#currentInputs"), "جریان I", "i", currentCount);
-
-    // نمایش فرم دوم
     $("#finalForm").show();
   });
-
+  // Loading and sending data
   $("#processFinal").on("click", function () {
-    // در اینجا می‌توان اطلاعات را پردازش کرد
-    $("#finalForm").submit(); // در صورت نیاز به ارسال به سرور
+    $(".load").css("z-index", "9999");
+    $(".load").show();
+    function getRandomEquation() {
+      let a = Math.floor(Math.random() * 100) + 1;
+      let b = Math.floor(Math.random() * 100) + 1;
+      let op = ["+", "-", "×", "÷"][Math.floor(Math.random() * 4)];
+      let equation = `${a} ${op} ${b} = `;
+      let result =
+        op === "÷"
+          ? (a / b).toFixed(2)
+          : op === "×"
+          ? a * b
+          : op === "+"
+          ? a + b
+          : a - b;
+      return { equation, result };
+    }
+
+    function updateEquation() {
+      let mathProblem = getRandomEquation();
+      $("#equation").text(mathProblem.equation);
+      $("#result").text("");
+
+      setTimeout(() => {
+        $("#result").text(`${mathProblem.result}`);
+      }, 1000);
+    }
+
+    $(document).ready(function () {
+      updateEquation();
+      setInterval(updateEquation, 2000);
+    });
+    $("#finalForm").submit();
   });
+  // Slide change button bottom right
   let slide = 1;
   let tog = 0;
   $(".next1").click(function () {
@@ -122,29 +149,30 @@ $(document).ready(function () {
     }
     $("#slide" + slide).prop("checked", true);
   });
+  // Changing slides with touch on the phone
   $(document).on("keydown", ".input-field", function (event) {
     if (event.key === "Enter") {
-      event.preventDefault(); // جلوگیری از عملکرد پیش‌فرض
-      let inputs = $(".input-field"); // گرفتن همه اینپوت‌ها
-      let index = inputs.index(this); // پیدا کردن اینپوت فعال
+      event.preventDefault(); 
+      let inputs = $(".input-field"); 
+      let index = inputs.index(this); 
 
       if (index !== -1 && index < inputs.length - 1) {
-        inputs.eq(index + 1).focus(); // فوکوس روی اینپوت بعدی
+        inputs.eq(index + 1).focus();
       } else {
-        $("#processInitial").click(); // کلیک روی دکمه
+        $("#processInitial").click();
       }
     }
   });
   $(document).on("keydown", ".inputfinal div div input", function (event) {
     if (event.key === "Enter") {
-      event.preventDefault(); // جلوگیری از عملکرد پیش‌فرض
-      let inputs = $(".inputfinal div div input"); // گرفتن همه اینپوت‌ها
-      let index = inputs.index(this); // پیدا کردن اینپوت فعال
+      event.preventDefault(); 
+      let inputs = $(".inputfinal div div input");
+      let index = inputs.index(this); 
 
       if (index !== -1 && index < inputs.length - 1) {
-        inputs.eq(index + 1).focus(); // فوکوس روی اینپوت بعدی
+        inputs.eq(index + 1).focus(); 
       } else {
-        $("#processFinal").click(); // کلیک روی دکمه
+        $("#processFinal").click(); 
       }
     }
   });

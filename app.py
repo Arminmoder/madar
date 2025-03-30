@@ -171,16 +171,16 @@ def final_submit():
             matrix[j][i] = matrixI[j][0]
         detm = determinant(matrix)
         if (detm == 0 or detr == 0):
-            if (determinant(matrix) == 0):
+            if (detm == 0):
                 result[f"v{i+1}"] = 0
             else:
                 result["error"] = "مدار مشکل دارد"
-
+                break
         else:
             if (type(result) == dict):
                 result[f"v{i+1}"] = round(detm / detr, 6)
-    draw_circuit(resistorslist, currentslist, filename="./static/circuit.png")
 
+    draw_circuit(resistorslist, currentslist, filename="./static/circuit.png")
     return render_template('result.html', result=result, viwe=viwe)
 
 

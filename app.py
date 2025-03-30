@@ -29,7 +29,7 @@ def final_submit():
     currents = {k: v for k, v in request.form.items() if k.startswith("i")}
 
     def draw_circuit(resistors, currents, filename="circuit.png"):
-            # ایجاد گراف‌ها
+        # ایجاد گراف‌ها
         G = nx.DiGraph()  # گراف جهت‌دار برای جریان‌ها
         Y = nx.Graph()  # گراف غیرجهت‌دار برای مقاومت‌ها
         G_all = nx.Graph()  # گراف کمکی شامل همه گره‌ها
@@ -74,8 +74,8 @@ def final_submit():
         # رسم جریان‌ها با فلش‌ها و رنگ قرمز
         current_edges = [(c[0], c[1]) for c in currents]
         nx.draw_networkx_edges(G, pos, edgelist=current_edges,
-                            edge_color="red", width=2.5, arrowsize=20,
-                            connectionstyle="arc3,rad=0.2")
+                               edge_color="red", width=2.5, arrowsize=20,
+                               connectionstyle="arc3,rad=0.2")
 
         # ذخیره و نمایش نمودار
         plt.savefig(filename, format='png')  # ذخیره تصویر
@@ -163,12 +163,17 @@ def final_submit():
                 matrix[a][b] = matrixR[a][b]
         for j in range(nude):
             matrix[j][i] = matrixI[j][0]
-        if (determinant(matrix) == 0 or determinant(matrixR) == 0):
-            result["error"] = "مدار مشکل دارد"
+        detm = determinant(matrix)
+        detr = determinant(matrixR)
+        if (detm == 0 or detr == 0):
+            if (determinant(matrix) == 0):
+                result[f"v{i+1}"] = 0
+            else:
+                result["error"] = "مدار مشکل دارد"
+
         else:
             if (type(result) == dict):
-                result[f"v{i+1}"] = round(determinant(matrix) /
-                                          determinant(matrixR), 6)
+                result[f"v{i+1}"] = round(detm / detr, 6)
     draw_circuit(resistorslist, currentslist, filename="./static/circuit.png")
 
     return render_template('result.html', result=result, viwe=viwe)

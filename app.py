@@ -118,6 +118,9 @@ def final_submit():
     for _ in range(resistors_count):
         n1, n2, Re = map(float, resistances[f"r{_+1}"].split())
         n1, n2 = int(n1) - 1, int(n2) - 1
+        if(Re ==0):
+            result["error"] = "اتصال کوتاه مقدار مقاومت صفر وارد شده است"
+            continue
         conductance = round(1 / Re, 6)
         resistorslist.append((n1 + 1, n2 + 1, Re))
         if (0 <= n1 < nude):

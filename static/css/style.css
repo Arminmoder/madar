@@ -276,6 +276,25 @@ body {
     bottom: -99%;
     left: 0;
   }
+  .overlay ul li i {
+    position: relative;
+    transform: translate(2px, -9px);
+  }
+  .overlay ul li:nth-child(2) img {
+    width: 28px;
+    position: relative;
+    transform: translate(52px, 5px)!important;
+  }
+  .overlay ul li:nth-child(1) {
+    transform: translate(1px, 0px)!important;
+  }
+
+  .overlay ul li:nth-child(2) {
+    transform: translate(-22px, 0px)!important;
+  }
+  .overlay ul li:nth-child(4) {
+    transform: translate(5px, 0px)!important;
+  }
   @keyframes anim1 {
     0% {
       position: absolute;

@@ -15,9 +15,16 @@
     {% for key, value in result.items() %}
     <p style="color: red">{{ key }}: {{ value }}</p>
     {% endfor %}
-    <a href="../static/circuit.png" class="linkimage" target="_blank"
-      ><div class="image"></div
-    ></a>
+    <div class="Click-here"><div class="image"></div></div>
+    <div class="custom-model-main">
+      <div class="custom-model-inner">
+        <div class="close-btn">×</div>
+        <div class="custom-model-wrap">
+          <div class="pop-up-content-wrap"><img class="linkimage" src="../static/circuit.png" alt="circuit"></div>
+        </div>
+      </div>
+      <div class="bg-overlay"></div>
+    </div>
     <script
       src="https://code.jquery.com/jquery-3.7.1.min.js"
       integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="

@@ -5,9 +5,9 @@
 
 @font-face {
   font-family: "IRANSans";
-  src: url(../font/IRANSansXnum/Woff/IRANSansXFaNum-Medium.woff)
+  src: url(https://www.arminmoder.ir/static/font/IRANSansXnum/Woff/IRANSansXFaNum-Medium.woff)
       format("woff"),
-    url(../font/IRANSansXnum/Woff2/IRANSansXFaNum-Medium.woff2)
+    url(https://www.arminmoder.ir/static/font/IRANSansXnum/Woff2/IRANSansXFaNum-Medium.woff2)
       format("woff2");
   font-weight: lighter;
   font-style: normal;

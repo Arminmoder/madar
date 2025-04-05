@@ -1,11 +1,20 @@
 import matplotlib.pyplot as plt
 import networkx as nx
 from flask import Flask, request, render_template
+from flask_cors import CORS
 import matplotlib
 matplotlib.use('Agg')
 
 
 app = Flask(__name__, template_folder="temp")
+CORS(app)
+
+
+@app.after_request
+def add_cors_headers(response):
+    if request.path.startswith('/static/'):
+        response.headers['Access-Control-Allow-Origin'] = '*'
+    return response
 
 
 @app.route('/')

@@ -283,7 +283,7 @@ body {
   .overlay ul li:nth-child(2) img {
     width: 28px;
     position: relative;
-    transform: translate(52px, 5px) !important;
+    transform: translate(62px, 5px) !important;
   }
   .overlay ul li:nth-child(1) {
     transform: translate(1px, 0px) !important;
@@ -745,7 +745,7 @@ input.leftoggle {
 .overlay ul li:nth-child(2) img {
   width: 28px;
   position: relative;
-  transform: translate(52px, 5px);
+  transform: translate(62px, 5px);
 }
 .overlay ul li:nth-child(1) {
   transform: translate(10px, 0px);

@@ -83,7 +83,10 @@ $(document).ready(function () {
         let label = $("<label>").text(`${labelText}${i}:`);
         let input = $("<input>")
           .attr("type", "text")
-          .attr("name", `${namePrefix}${i}`);
+          .attr("name", `${namePrefix}${i}`)
+          .attr("pattern", "^\\d+\\s+\\d+\\s+\\d+$")
+          .attr("title", "لطفاً سه عدد را با فاصله وارد کنید. مثل: 10 2 15")
+          .attr("required", true);
         parent.append($("<div>").append(label, input));
       }
     }
@@ -125,7 +128,14 @@ $(document).ready(function () {
       updateEquation();
       setInterval(updateEquation, 2000);
     });
-    $("#finalForm").submit();
+    const form = $("#finalForm");
+
+    if (form.checkValidity()) {
+      form.submit();
+    } else {
+      form.reportValidity();
+      $(".load").hide();
+    }
   });
   // Slide change button bottom right
   let slide = 1;
@@ -152,9 +162,9 @@ $(document).ready(function () {
   // Changing slides with touch on the phone
   $(document).on("keydown", ".input-field", function (event) {
     if (event.key === "Enter") {
-      event.preventDefault(); 
-      let inputs = $(".input-field"); 
-      let index = inputs.index(this); 
+      event.preventDefault();
+      let inputs = $(".input-field");
+      let index = inputs.index(this);
 
       if (index !== -1 && index < inputs.length - 1) {
         inputs.eq(index + 1).focus();
@@ -165,14 +175,14 @@ $(document).ready(function () {
   });
   $(document).on("keydown", ".inputfinal div div input", function (event) {
     if (event.key === "Enter") {
-      event.preventDefault(); 
+      event.preventDefault();
       let inputs = $(".inputfinal div div input");
-      let index = inputs.index(this); 
+      let index = inputs.index(this);
 
       if (index !== -1 && index < inputs.length - 1) {
-        inputs.eq(index + 1).focus(); 
+        inputs.eq(index + 1).focus();
       } else {
-        $("#processFinal").click(); 
+        $("#processFinal").click();
       }
     }
   });

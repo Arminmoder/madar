@@ -157,7 +157,9 @@ def final_submit():
                 result[f"v{i+1}"] = round(detm / detr, 6)
 
     draw_circuit(resistorslist, currentslist, filename="./static/circuit.png")
-    return render_template('result.html', result=result, viwe=viwe)
+    image_url = f"/static/circuit.png?v={viwe}"
+    return render_template('result.html', result=result, viwe=viwe, image_url=image_url)
+
 
 
 if __name__ == "__main__":

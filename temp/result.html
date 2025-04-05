@@ -15,12 +15,12 @@
     {% for key, value in result.items() %}
     <p style="color: red">{{ key }}: {{ value }}</p>
     {% endfor %}
-    <div class="Click-here"><div class="image"></div></div>
+    <div class="Click-here"><div class="image" style="background: url('{{ image_url }}');"></div></div>
     <div class="custom-model-main">
       <div class="custom-model-inner">
         <div class="close-btn">×</div>
         <div class="custom-model-wrap">
-          <div class="pop-up-content-wrap"><img class="linkimage" src="https://www.arminmoder.ir/static/circuit.png" alt="circuit"></div>
+          <div class="pop-up-content-wrap"><img class="linkimage" src="{{ image_url }}" alt="circuit"></div>
         </div>
       </div>
       <div class="bg-overlay"></div>
@@ -44,7 +44,7 @@
             </div>
           </li>
           <li>
-            <a href="https://www.arminmoder.ir/static/circuit.png" target="_blank"
+            <a href="{{ image_url }}" target="_blank"
               ><i class="fa-solid fa-chart-pie"></i
             ></a>
           </li>

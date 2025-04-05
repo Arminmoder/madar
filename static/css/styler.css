@@ -380,7 +380,7 @@ p.project {
   right: 0;
   width: 100%;
   height: 40%;
-  background: url("https://www.arminmoder.ir/static/circuit.png");
+  /* background: url("https://www.arminmoder.ir/static/circuit.png"); */
   background-position: center;
   background-repeat: no-repeat;
   background-size:contain;

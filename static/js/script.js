@@ -77,7 +77,9 @@ $(document).ready(function () {
     $("#hiddenCurrentGenerator").val(currentCount);
     $("#resistanceInputs").empty();
     $("#currentInputs").empty();
-
+    function toEnglishDigits(str) {
+      return str.replace(/[۰-۹]/g, (d) => "۰۱۲۳۴۵۶۷۸۹".indexOf(d));
+    }
     function createInputFields(parent, labelText, namePrefix, count) {
       const examples = [
         "1 2 30",
@@ -99,6 +101,9 @@ $(document).ready(function () {
           .attr("title", "لطفاً سه عدد را با فاصله وارد کنید. مثل: 10 2 3")
           .attr("placeholder", randomExample)
           .attr("required", true);
+        input.on("input", function () {
+          this.value = toEnglishDigits(this.value);
+        });
         parent.append($("<div>").append(label, input));
       }
     }

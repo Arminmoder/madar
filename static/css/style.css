@@ -5,9 +5,9 @@
 
 @font-face {
   font-family: "IRANSans";
-  src: url(./static/font/IRANSansXnum/Woff/IRANSansXFaNum-Medium.woff)
+  src: url(https://www.arminmoder.ir/static/font/IRANSansXnum/Woff/IRANSansXFaNum-Medium.woff)
       format("woff"),
-    url(./static/fonts/IRANSansXnum/Woff2/IRANSansXFaNum-Medium.woff2)
+    url(https://www.arminmoder.ir/static/fonts/IRANSansXnum/Woff2/IRANSansXFaNum-Medium.woff2)
       format("woff2");
   font-weight: lighter;
   font-style: normal;
@@ -283,17 +283,17 @@ body {
   .overlay ul li:nth-child(2) img {
     width: 28px;
     position: relative;
-    transform: translate(52px, 5px)!important;
+    transform: translate(52px, 5px) !important;
   }
   .overlay ul li:nth-child(1) {
-    transform: translate(1px, 0px)!important;
+    transform: translate(1px, 0px) !important;
   }
 
   .overlay ul li:nth-child(2) {
-    transform: translate(-22px, 0px)!important;
+    transform: translate(-22px, 0px) !important;
   }
   .overlay ul li:nth-child(4) {
-    transform: translate(5px, 0px)!important;
+    transform: translate(5px, 0px) !important;
   }
   @keyframes anim1 {
     0% {
@@ -867,3 +867,7 @@ input.leftoggle {
     transform: rotate(1turn);
   }
 }
+* {
+  font-family: IRANSans;
+}
+

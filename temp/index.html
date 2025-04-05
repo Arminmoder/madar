@@ -4,8 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>armin onsorpour</title>
-    <link rel="stylesheet" href="https://www.arminmoder.ir/static/css/style.css" />
-    <link rel="icon" type="image/png" href="https://www.arminmoder.ir/static/image/icon.png" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='image/icon.png') }}" />
   </head>
   <body>
     <script
@@ -179,7 +179,7 @@
               </li>
               <li>
                 <a href="https://eitaa.com/Armin_moder" target="_blank"
-                  ><img src="https://www.arminmoder.ir/static/image/eitaa.png" alt="" />ایتا</a
+                  ><img src="{{ url_for('static', filename='image/eitaa.png') }}" alt="" />ایتا</a
                 >
               </li>
               <li>
@@ -219,6 +219,6 @@
       integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
       crossorigin="anonymous"
     ></script>
-    <script src="https://www.arminmoder.ir/static/js/script.js"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
   </body>
 </html>

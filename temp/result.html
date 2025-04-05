@@ -8,7 +8,7 @@
       src="https://kit.fontawesome.com/3dde4771d4.js"
       crossorigin="anonymous"
     ></script>
-    <link rel="stylesheet" href="https://www.arminmoder.ir/static/css/styler.css" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styler.css') }}" />
   </head>
   <body>
     <h2>نتایج</h2>
@@ -56,6 +56,6 @@
         </ul>
       </div>
     </div>
-    <script src="https://www.arminmoder.ir/static/js/scriptr.js"></script>
+    <script src="{{ url_for('static', filename='js/scriptr.js') }}"></script>
   </body>
 </html>

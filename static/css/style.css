@@ -871,3 +871,7 @@ input.leftoggle {
   font-family: IRANSans;
 }
 
+input:invalid {
+  background-color: #e4e4e4db!important;
+}
+

@@ -85,7 +85,7 @@ $(document).ready(function () {
           .attr("type", "text")
           .attr("name", `${namePrefix}${i}`)
           .attr("pattern", "^\\d+\\s+\\d+\\s+\\d+$")
-          .attr("title", "لطفاً سه عدد را با فاصله وارد کنید. مثل: 10 2 15")
+          .attr("title", "لطفاً سه عدد را با فاصله وارد کنید. مثل: 10 2 3")
           .attr("required", true);
         parent.append($("<div>").append(label, input));
       }
@@ -128,7 +128,7 @@ $(document).ready(function () {
       updateEquation();
       setInterval(updateEquation, 2000);
     });
-    const form = $("#finalForm");
+    const form = document.getElementById("finalForm");
 
     if (form.checkValidity()) {
       form.submit();

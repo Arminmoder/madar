@@ -80,13 +80,13 @@ $(document).ready(function () {
 
     function createInputFields(parent, labelText, namePrefix, count) {
       const examples = [
-        "10 20 30",
-        "-5 0 2",
-        "0 -12 8",
-        "3 3 3",
-        "-1 -1 -1",
-        "7 -4 15",
-        "-10 -20 -30",
+        "1 2 30",
+        "2 0 10",
+        "0 1 20",
+        "3 4 5",
+        "5 6 10",
+        "7 6 15",
+        "1 4 5",
       ];
       for (let i = 1; i <= count; i++) {
         let randomExample =

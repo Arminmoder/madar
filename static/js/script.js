@@ -82,13 +82,13 @@ $(document).ready(function () {
     }
     function createInputFields(parent, labelText, namePrefix, count) {
       const examples = [
-        "1 2 30",
-        "2 0 10",
-        "0 1 20",
-        "3 4 5",
-        "5 6 10",
-        "7 6 15",
-        "1 4 5",
+        "ورودی: 1 2 30",
+        "ورودی: 2 0 10",
+        "ورودی: 0 1 20",
+        "ورودی: 3 4 5",
+        "ورودی: 5 6 10",
+        "ورودی: 7 6 15",
+        "ورودی: 1 4 5",
       ];
       for (let i = 1; i <= count; i++) {
         let randomExample =
@@ -97,7 +97,7 @@ $(document).ready(function () {
         let input = $("<input>")
           .attr("type", "text")
           .attr("name", `${namePrefix}${i}`)
-          .attr("pattern", "^-?\\d+\\s+-?\\d+\\s+-?\\d+$")
+          .attr("pattern", "^-?\\d+\\s+-?\\d+\\s+-?\\d+(\\.\\d+)?$")
           .attr("title", "لطفاً سه عدد را با فاصله وارد کنید. مثل: 10 2 3")
           .attr("placeholder", randomExample)
           .attr("required", true);
